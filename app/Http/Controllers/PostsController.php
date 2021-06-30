@@ -17,11 +17,11 @@ class PostsController extends Controller
     // index => view('posts.index');
 
     public function create() {
-        dd('OK'); // diedump => 덤프하고 죽음.
+        // dd('OK'); // diedump => 덤프하고 죽음.
         return view('posts.create');
     }
 
-    public function store() {
-        return view('[psts.store');
+    public function store(Request $request) {
+        return view('posts.store');
     }
 }
