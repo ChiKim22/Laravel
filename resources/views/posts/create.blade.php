@@ -14,18 +14,13 @@
         {{-- <input name="Title" id="title" cols="30" rows="3" placeholder="Title"><br>
        <textarea name="input" id="input" cols="30" rows="10" placeholder="Text"></textarea><br>
         <button type="submit">submit</button> --}}
-        <div class="container">
-        <form>
-            <div class="form-group">
-              <label for="exampleInputEmail1">title</label>
-              <input type="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div class="posts">
+                @csrf
+              <input type="title" class="post" name="title" placeholder="title"><br>
+              <textarea type="password" class="post" id="content" name="content" placeholder="content"></textarea>
             </div>
-            <div class="form-group">
-              <label for="content">content</label>
-              <textarea type="password" class="form-control" id="content"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+            <button type="submit" class="submit">Submit</button>
+          {{-- </form> --}}
         </div>
     </form>
     

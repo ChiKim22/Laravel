@@ -22,6 +22,15 @@ class PostsController extends Controller
     }
 
     public function store(Request $request) {
-        return view('posts.store');
+        // $request -> input['title'];
+        // $request -> input['content'];
+
+        //GET 방식은 정보조회만
+        //POST 방식은 자원에 대한 변경 => 해킹으로 악용될 우려로 제약이 걸려있음.
+
+        $title = $request->title;
+        $content = $request->content;
+
+        dd($request);
     }
 }
