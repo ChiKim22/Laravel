@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\TestController;
-use App\Http\Controllers\PostsController;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,24 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/test', function() {
-    return 'Welcome!!!!';
-});
+require __DIR__.'/auth.php';
 
-Route::get('/test2', function() {
-    return view('test.index'); //.과 '/' 는 같은 구분자
-});
-
-Route::get('/test3', function() {
-    // 비지니스 로직 처리
-    $name = '홍길동';
-    $age = 20;
-    // return view('test.show', ['name'=>$name, 'age'=>10]);
-    return view('test.show', compact('name', 'age')); //compact 하게 쓰지만 대신 변수 선언 필요.
-});
-
-Route::get('/test4', [TestController::class, 'index']);
+// Route::get('/test4', [TestController::class, 'index']);
 
 Route::get('/posts/create', [PostsController::class, 'create']);
 // Route::get('/posts/create', 'PostsController@create'); 도 가능하다.
