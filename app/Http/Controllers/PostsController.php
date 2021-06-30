@@ -15,8 +15,13 @@ class PostsController extends Controller
     // destroy
     // show => view('posts.show');
     // index => view('posts.index');
-    
+
     public function create() {
+        dd('OK'); // diedump => 덤프하고 죽음.
         return view('posts.create');
+    }
+
+    public function store() {
+        return view('[psts.store');
     }
 }
