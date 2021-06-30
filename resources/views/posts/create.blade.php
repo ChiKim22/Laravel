@@ -20,7 +20,6 @@
               <textarea type="password" class="post" id="content" name="content" placeholder="content"></textarea>
             </div>
             <button type="submit" class="submit">Submit</button>
-          {{-- </form> --}}
         </div>
     </form>
     
