@@ -16,8 +16,14 @@
         <button type="submit">submit</button> --}}
             <div class="posts">
                 @csrf
-              <input type="title" class="post" name="title" placeholder="title"><br>
-              <textarea type="password" class="post" id="content" name="content" placeholder="content"></textarea>
+              <input type="title" class="post" name="title" placeholder="title" value="{{ old('title') }}"><br>
+                @error('title')
+                    <div>{{ $message }}</div>
+                @enderror
+              <textarea type="password" class="post" id="content" name="content" placeholder="content">{{ old('content') }}</textarea>
+                @error('content')
+                    <div>{{ $message }}</div>
+                @enderror
             </div>
             <button type="submit" class="submit">Submit</button>
         </div>
