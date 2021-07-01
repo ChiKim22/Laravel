@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {   //모델은 하나의 레코드
-    protected $table = 'posts';
+    // protected $table = 'posts';
     use HasFactory;
 }
