@@ -31,3 +31,5 @@ Route::get('/posts/create', [PostsController::class, 'create']);
 // Route::get('/posts/create', 'PostsController@create'); 도 가능하다.
 
 Route::post('/posts/store', [PostsController::class, 'store']);
+
+Route::get('/posts/index', [PostsController::class. 'index']);

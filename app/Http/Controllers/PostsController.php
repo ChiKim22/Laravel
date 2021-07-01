@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use Illuminate\Suport\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -31,6 +33,19 @@ class PostsController extends Controller
         $title = $request->title;
         $content = $request->content;
 
-        dd($request);
+        //DB 에 저장
+        $post = new Post();
+        $post->title = $title;
+        $post->content = $content;
+        $post->user_id = Auth::user()->id;
+        $post->save();
+
+        //결과 뷰를 반환
+        return redirect('/posts/index');
+        // dd($request);
+    }
+    public function index() {
+        $posts = Post::all();
+        return $posts;
     }
 }
