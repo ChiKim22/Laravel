@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
-use Illuminate\Suport\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -33,6 +33,11 @@ class PostsController extends Controller
         $title = $request->title;
         $content = $request->content;
 
+        $request->validate([ // 빈칸일때 서브밋 안함.
+            'title' => 'required|min:3',
+            'content' => 'required'
+        ]);
+
         //DB 에 저장
         $post = new Post();
         $post->title = $title;
@@ -45,7 +50,11 @@ class PostsController extends Controller
         // dd($request);
     }
     public function index() {
-        $posts = Post::all();
-        return $posts;
-    }
+        // $post = Post::all();
+        // $post = Post::orderBy('created_at', 'desc')->get();
+        // $post= Post::latest()->get();
+        $posts = Post::latest()->paginate(5); // 페이지별로 몇개
+        // dd($posts[0]->created_at);
+        return view('posts.index', ['posts'=>$posts]);
+        }
 }
