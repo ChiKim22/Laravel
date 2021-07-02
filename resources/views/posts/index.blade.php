@@ -1,3 +1,4 @@
+<x-app-layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +9,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script></head>
 <body>
     <div class="container mt-5 mb-5">
-        <h1>게시글 리스트</h1>
+        {{-- <a href="{{ route('dashboard') }}">Dashboard</a>
+        <h1>게시글 리스트</h1> --}}
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Post') }}
+            </h2>
+        </x-slot>
+        @auth
         <a href="/posts/create" class="btn btn-primary">게시글 작성</a>
+        @endauth
+
     <ul class="container mt-3">
         @foreach ($posts as $post)
         <li class="list-group-item">
-        <span>Title : {{ $post->title }}</span>
+        <span>
+            <a href="{{ route('posts.show', ['id'=>$post->id, 'page'=>$posts->currentPage()]) }}">
+             Title : {{ $post->title }}
+            </a>
+        </span>
         <div>
-            content:{{ $post->content }}
+            content: {{ $post->content }}
         </div>
         <span>@written on {{ $post->created_at }}</span>
         <hr>
@@ -28,3 +42,4 @@
     </div>
 </body>
 </html>
+</x-app-layout>
