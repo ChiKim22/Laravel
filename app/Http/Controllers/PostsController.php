@@ -44,10 +44,12 @@ class PostsController extends Controller
         $post->content = $content;
         $post->user_id = Auth::user()->id;
         $post->save();
+        // dd($request);
 
         //결과 뷰를 반환
         return redirect('/posts/index');
-        // dd($request);
+        // $posts = Post::paginate(5);
+        // return view('posts.index', ['posts'=>$posts]); 
     }
     public function index() {
         // $post = Post::all();
@@ -55,6 +57,19 @@ class PostsController extends Controller
         // $post= Post::latest()->get();
         $posts = Post::latest()->paginate(5); // 페이지별로 몇개
         // dd($posts[0]->created_at);
+        // dd($posts);
+
         return view('posts.index', ['posts'=>$posts]);
         }
+
+    public function show(Request $request, $id) {
+        $post = Post::find($id);
+        $page = $request->page;
+        return view('posts.show', compact('post', 'page'));
+    }
+
+    public function __construct()
+    {
+        $this->middleware(['auth'])/*->except('index', 'show')*/;
+    }
 }
