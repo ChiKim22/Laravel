@@ -27,9 +27,8 @@ require __DIR__.'/auth.php';
 
 // Route::get('/test4', [TestController::class, 'index']);
 
-Route::get('/posts/create', [PostsController::class, 'create']);
+Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.create')/*->middleware(['auth'])*/;
 // Route::get('/posts/create', 'PostsController@create'); 도 가능하다.
-
-Route::post('/posts/store', [PostsController::class, 'store']);
-
-Route::get('/posts/index', [PostsController::class, 'index']);
+Route::post('/posts/store', [PostsController::class, 'store'])/*->middleware(['auth'])*/;
+Route::get('/posts/index', [PostsController::class, 'index'])->name('posts.index');
+Route::get('/posts/show/{id}', [PostsController::class, 'show'])->name('posts.show');
