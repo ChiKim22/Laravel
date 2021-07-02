@@ -1,33 +1,48 @@
+<x-app_layout>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Posts</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script></head>
 </head>
 <body>
-    <h1>Create</h1>
+    
+    {{-- <h1>Create</h1> --}}
     <form action="/posts/store" method="post">
         {{-- <input name="Title" id="title" cols="30" rows="3" placeholder="Title"><br>
        <textarea name="input" id="input" cols="30" rows="10" placeholder="Text"></textarea><br>
         <button type="submit">submit</button> --}}
-            <div class="posts">
+
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Create') }}
+            </h2>
+        </x-slot>
+            <form action="/posts/store" method="post">
                 @csrf
-              <input type="title" class="post" name="title" placeholder="title" value="{{ old('title') }}"><br>
-                @error('title')
-                    <div>{{ $message }}</div>
-                @enderror
-              <textarea type="password" class="post" id="content" name="content" placeholder="content">{{ old('content') }}</textarea>
-                @error('content')
-                    <div>{{ $message }}</div>
-                @enderror
-            </div>
-            <button type="submit" class="submit">Submit</button>
-        </div>
-    </form>
-    
+                <legend style="text-align: center">글쓰기</legend>
+                <div class="mb-3">
+                    <label for="title" class="form-label">제목</label>
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="{{ old('title') }}">
+                        @error('title')
+                            <div>{{ $message }}</div>
+                        @enderror
+                  </div>
+                  <div class="mb-3">
+                    <label for="content" class="form-label">내용</label>
+                    <textarea class="form-control" name="content" id="content" rows="15">{{ old('content') }}</textarea>
+                    @error('content')
+                            <div>{{ $message }}</div>
+                        @enderror
+                  </div>
+                  <div class="submitbtn">
+                    <button type="submit" class="btn btn-outline-primary">등록하기</button>
+                  </div>
+            </form>
+            </div>        
 </body>
 </html>
+</x-app_layout>
