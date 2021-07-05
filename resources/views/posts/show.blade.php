@@ -27,6 +27,14 @@
                 <textarea class="form-control" readonly rows="5">{{ $post->content }}</textarea>
               </div>
               <div class="form-group">
+                <label>Image</label>
+                <label for="imageFile">Post Image</label>
+                <div class="my-6 mx-3 w-25">
+                  {{-- <img src="/storage/images/{{ $post->image ?? 'noImage.jpg' }}"/> --}}
+                  <img src="{{ $post->imagePath() }}" class="img-thumbnail"/>
+                </div>
+                </div>
+              <div class="form-group">
                 <label>Written Date</label>
                 <input type="text" readonly class="form-control" value="{{ $post->created_at->diffForHumans() }}">
               </div>

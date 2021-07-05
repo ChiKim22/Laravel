@@ -11,7 +11,10 @@
 <body>
     
     {{-- <h1>Create</h1> --}}
-    <form action="/posts/store" method="post">
+    <form action="/posts/store" method="post" enctype="multipart/form-data">
+         {{-- enctype="miltipart/form-data" : 파일 업로드에 반드시 필요 --}}
+
+        
         {{-- <input name="Title" id="title" cols="30" rows="3" placeholder="Title"><br>
        <textarea name="input" id="input" cols="30" rows="10" placeholder="Text"></textarea><br>
         <button type="submit">submit</button> --}}
@@ -21,7 +24,7 @@
                 {{ __('Create') }}
             </h2>
         </x-slot>
-            <form action="/posts/store" method="post">
+            {{-- <form action="/posts/store" method="post">  --}}
                 @csrf
                 <legend style="text-align: center">글쓰기</legend>
                 <div class="mb-3">
@@ -37,6 +40,14 @@
                     @error('content')
                             <div>{{ $message }}</div>
                         @enderror
+                  </div>
+                  <div class="form-group">
+                      <label for="file">File</label>
+                      <input type="file" id="file" name="imageFile">
+
+                      @error('imageFile')
+                       <div>{{ $message }}</div>
+                      @enderror
                   </div>
                   <div class="submitbtn">
                     <button type="submit" class="btn btn-outline-primary">등록하기</button>

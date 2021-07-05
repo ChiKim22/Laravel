@@ -28,10 +28,13 @@
              Title : {{ $post->title }}
             </a>
         </span>
-        <div>
+        {{-- <div>
             content: {{ $post->content }}
-        </div>
-        <span>@written on {{ $post->created_at }}</span>
+        </div> --}}
+        <br>
+        <span>@written on {{ $post->created_at }}</span>  {{-- 상세한 시간 --}}
+        <br>
+        <span>{{ $post->created_at->diffForHumans() }}</span> {{-- n일전 --}}
         <hr>
     </li>
         @endforeach

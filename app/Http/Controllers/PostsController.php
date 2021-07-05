@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -35,7 +36,8 @@ class PostsController extends Controller
 
         $request->validate([ // 빈칸일때 서브밋 안함.
             'title' => 'required|min:3',
-            'content' => 'required'
+            'content' => 'required',
+            'imageile' => 'image|max: 2000'
         ]);
 
         //DB 에 저장
@@ -45,6 +47,34 @@ class PostsController extends Controller
         $post->user_id = Auth::user()->id;
         $post->save();
         // dd($request);
+
+        //File 처리
+        //내가 원하는 파일시스템 상의 위치에 원하는 이름으로 
+        //파일을 저장하고   
+        if($request->file('imageFile')){
+        
+        $name = $request->file('imageFile')->getClientOriginalName();
+        //확장자 제외
+        //ex) 1.jpg -> 1
+        $extension  = $request->file('imageFile')->extension();
+
+        $nameWithoutExtension = Str::of($name)->basename('.'.$extension);
+        $fileName = $nameWithoutExtension .'_' . time() . '.' . $extension;
+
+        // dd($fileName);
+        // $fileName = $name;
+        
+        $request->file('imageFile')->storeAs('public/images', $fileName);
+        //$request->imageFile
+        //그 파일 이름을 컬럼에 설정
+        $post->image = $fileName;
+        }
+    
+
+        $post->save();
+        //$post->image = $fileName;
+
+        // $post->save();
 
         //결과 뷰를 반환
         return redirect('/posts/index');
