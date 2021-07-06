@@ -31,4 +31,11 @@ Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.cre
 // Route::get('/posts/create', 'PostsController@create'); 도 가능하다.
 Route::post('/posts/store', [PostsController::class, 'store'])/*->middleware(['auth'])*/;
 Route::get('/posts/index', [PostsController::class, 'index'])->name('posts.index');
+
+//상세보기
 Route::get('/posts/show/{id}', [PostsController::class, 'show'])->name('posts.show');
+//edit
+Route::get('/posts/{post}', [PostsController::class, 'edit'])->name('post.edit');
+Route::put('/posts/{id}', [PostsController::class, 'update'])->name('post.update');
+//delete
+Route::delete('/posts/{id)', [PostController::class, 'destroy'])->name('post.delete');

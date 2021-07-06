@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostsController extends Controller
@@ -52,7 +53,21 @@ class PostsController extends Controller
         //내가 원하는 파일시스템 상의 위치에 원하는 이름으로 
         //파일을 저장하고   
         if($request->file('imageFile')){
-        
+            $post->image = $this->uploadPostImage($request);
+        }
+
+        $post->save();
+        //$post->image = $fileName;
+
+        // $post->save();
+
+        //결과 뷰를 반환
+        return redirect('/posts/index');
+        // $posts = Post::paginate(5);
+        // return view('posts.index', ['posts'=>$posts]); 
+    }
+
+    protected function uploadPostImage($request) {
         $name = $request->file('imageFile')->getClientOriginalName();
         //확장자 제외
         //ex) 1.jpg -> 1
@@ -67,20 +82,9 @@ class PostsController extends Controller
         $request->file('imageFile')->storeAs('public/images', $fileName);
         //$request->imageFile
         //그 파일 이름을 컬럼에 설정
-        $post->image = $fileName;
-        }
-    
-
-        $post->save();
-        //$post->image = $fileName;
-
-        // $post->save();
-
-        //결과 뷰를 반환
-        return redirect('/posts/index');
-        // $posts = Post::paginate(5);
-        // return view('posts.index', ['posts'=>$posts]); 
+        return $fileName;
     }
+
     public function index() {
         // $post = Post::all();
         // $post = Post::orderBy('created_at', 'desc')->get();
@@ -101,5 +105,44 @@ class PostsController extends Controller
     public function __construct()
     {
         $this->middleware(['auth'])/*->except('index', 'show')*/;
+    }
+    
+    public function edit(Post $post) {
+        // $post = Post::where('id', $id)->first();
+        // $post = Post::find($id);
+        // dd($post);
+
+        // 수정 폼 생성
+        return view('posts.edit')->with('post', $post);
+    }
+    public function update(Request $request, $id) {
+        // vaildation
+        $request->validate([
+            'title' => 'required|min:3',
+            'content' => 'required',
+            'imageFile' => 'image|max:2000'
+        ]);
+
+        $post = Post::find($id);
+        // 이미지 파일 수정도 같이됨 (파일시스템)
+        if($request->file('imageFile')){
+            $imagePath = 'public/images/'.$post->image;
+            Storage::delete($imagePath);
+            $post->image = $this->uploadPostImage($request);
+        }
+
+        // 게시글을 디비에서 수정
+        $post->title=$request->title;
+        $post->content=$request->content;
+        $post->save();
+
+
+        return redirect()->route('posts.show', ['id'=>$id]);
+    }
+    public function destroy() 
+    // 삭제전 파일 시스템에서 이미지 파일 삭제
+     // 게시글을 디비에서 삭제
+    {
+
     }
 }
