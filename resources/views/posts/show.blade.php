@@ -38,10 +38,18 @@
                 <label>Written Date</label>
                 <input type="text" readonly class="form-control" value="{{ $post->created_at->diffForHumans() }}">
               </div>
-
+              <div class="form-group">
+                <label>Last Worked</label>
+                <input type="text" readonly class="form-control" value="{{ $post->updated_at }}">
+              </div>
               <div class="form-group">
                 <label>User</label>
                 <input type="text" readonly class="form-control" value="{{ $post->user_id }}">
+              </div>
+
+              <div class="flex">
+                <a class="btn btn-warning" href = "{{ route('post.edit', ['post'=>$post->id]) }}">Edit</a>
+                <a class="btn btn-danger" href = "{{ route('post.delete',['id'=>$post->id]) }}">Delete</a>
               </div>
         </form>
         </div>
@@ -49,4 +57,3 @@
 </body>
 </html>
 </x-app-layout>
-
