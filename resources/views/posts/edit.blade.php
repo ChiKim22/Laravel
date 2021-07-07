@@ -9,7 +9,7 @@
     </head>
     <body>
         
-        <form action="{{ route('post.update', ['id'=>$post->id]) }}"
+        <form action="{{ route('post.update', ['id'=>$post->id, 'page'=>$page]) }}"
             method="post"
             enctype="multipart/form-data">
 

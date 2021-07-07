@@ -46,14 +46,24 @@
                 <label>User</label>
                 <input type="text" readonly class="form-control" value="{{ $post->user_id }}">
               </div>
-
+              
+              @auth
+              {{-- @if (auth()->user()->id == $post->user_id) --}}
+              @can('update, $post')
               <div class="flex">
-                <a class="btn btn-warning" href = "{{ route('post.edit', ['post'=>$post->id]) }}">Edit</a>
-                <a class="btn btn-danger" href = "{{ route('post.delete',['id'=>$post->id]) }}">Delete</a>
-              </div>
+                <a class="btn btn-warning" href = "{{ route('post.edit', ['post'=>$post->id, 'page'=>$page]) }}">Edit</a>
+
+                <form action="{{ route('post.delete', ['id'=>$post->id, 'page'=>$page]) }}" method="post">
+                  @csrf
+                  @method("delete")
+                  <button class="btn btn-danger">Delete</button>
+                </form>
+              </div>           
+              {{-- @endif --}}
+              @endcan
+              @endauth
         </form>
         </div>
-    
 </body>
 </html>
 </x-app-layout>
