@@ -32,6 +32,7 @@ Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.cre
 Route::post('/posts/store', [PostsController::class, 'store'])/*->middleware(['auth'])*/;
 Route::get('/posts/index', [PostsController::class, 'index'])->name('posts.index');
 
+Route::get('/posts/myPost', [PostsController::class, 'myPost'])->name('posts.myPost');
 //상세보기
 Route::get('/posts/show/{id}', [PostsController::class, 'show'])->name('posts.show');
 //edit

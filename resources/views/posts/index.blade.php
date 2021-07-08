@@ -16,6 +16,7 @@
                 {{ __('Post') }}
             </h2>
         </x-slot>
+
         @auth
         <a href="/posts/create" class="btn btn-primary">게시글 작성</a>
         @endauth
