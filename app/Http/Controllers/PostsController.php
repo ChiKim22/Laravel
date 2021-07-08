@@ -171,4 +171,16 @@ class PostsController extends Controller
       
       return redirect()->route('posts.index', ['page'=>$page]);
     }
+
+    public function myPost() {
+        // dd('ok');
+        // $posts = auth()->user()->posts()->latest()->paginate(5);
+
+        // return view('posts.index', ['posts'=>$posts]);
+
+        $posts = auth()->user()->posts()->latest()->paginate(5);
+        // 정렬기준 (order by('title', '여러개 가능') ==> 제목 순)
+        return view('posts.index', compact('posts'));
+    }
+    
 }
