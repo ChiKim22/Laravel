@@ -99,6 +99,9 @@ class PostsController extends Controller
     public function show(Request $request, $id) {
         $post = Post::find($id);
         $page = $request->page;
+        $post->count++; // 조회 수 증가시켜줌._ 1번째 가장 심플한 방법. 한사람이 여러번 조회수 올리기 가능.
+        $post->save(); // DB에 반영.
+
         return view('posts.show', compact('post', 'page'));
     }
 
