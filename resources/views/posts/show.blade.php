@@ -14,9 +14,6 @@
             {{ __('Show') }}
         </h2>
     </x-slot>
-    <div class="mb-5">
-        <a href="{{ route('posts.index', ['page'=>$page]) }}">Menu</a>
-    </div>
         {{-- <form action=""></form> --}}
                 <div class="container mb-3">
                 <label for="title">Title</label>
@@ -53,6 +50,8 @@
               @if (auth()->user()->id == $post->user_id)
               {{-- @can('update, $post') --}}
               <div class="flex">
+                <a class="btn btn-primary" href="{{ route('posts.index', ['page'=>$page]) }}">Menu</a>
+                
                 <a class="btn btn-warning" href = "{{ route('post.edit', ['post'=>$post->id, 'page'=>$page]) }}">Edit</a>
 
                 <form action="{{ route('post.delete', ['id'=>$post->id, 'page'=>$page]) }}" method="post">
