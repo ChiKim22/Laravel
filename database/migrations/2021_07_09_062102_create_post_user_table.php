@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -19,7 +20,7 @@ class CreatePostUserTable extends Migration
              // constrained 를 사용해 네이밍 콘벤션을 따라 해석하게 됨.
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
             // 언제 조회했는지 조회
-            $table->timestamp('created_at'); // 마지막 조회 시간
+            $table->timestamp('created_at')/*->default(new Expression('now()'))*/; // 마지막 조회 시간 , 기본값 지정.
             $table->unique(['user_id', 'post_id']);
         });
     }

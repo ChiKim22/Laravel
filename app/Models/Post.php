@@ -23,4 +23,9 @@ class Post extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    public function viewers() {
+    return $this->belongsToMany(User::class /*,'post_user', 'post_id'*/); //네이밍 컨벤션을 따르면 필요없음.
+    // $this->belongsToMany(User::class, 'post_user', 'post_id', 'user_id', 'id', 'id', 'users');// option
+    }
 }

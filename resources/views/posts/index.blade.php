@@ -37,7 +37,9 @@
         <br>
         <span>{{ $post->created_at->diffForHumans() }}</span> {{-- n일전 --}}
         <hr>
-        {{ $post->count }} {{ $post->count > 0 ? Str::plural('view',$post->count) : 'view' }} {{-- 복수이면 views, 기본이면 view --}}
+        {{ $post->viewers->count() }} 
+        {{ $post->viewers->count() > 0 ? Str::plural('view', $post->viewers->count()) : 'view' }} 
+        {{-- 복수이면 views, 기본이면 view --}}
     </li>
         @endforeach
     </ul>

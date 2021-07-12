@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -99,8 +100,19 @@ class PostsController extends Controller
     public function show(Request $request, $id) {
         $post = Post::find($id);
         $page = $request->page;
-        $post->count++; // 조회 수 증가시켜줌._ 1번째 가장 심플한 방법. 한사람이 여러번 조회수 올리기 가능.
-        $post->save(); // DB에 반영.
+
+        // $post->count++; // 조회 수 증가시켜줌._ 1번째 가장 심플한 방법. 한사람이 여러번 조회수 올리기 가능.
+        // $post->save(); // DB에 반영.
+        /*
+         이 글을 조회한 사용자들 중에, 현재 로그인한 사용자가 포함되어 있는지를 체크,
+         포함안되어 있으면 추가, 
+         포함되어있으면 다음 단계로 넘어감. 
+        */
+        
+        if (Auth::user() != null && !$post->viewers->contains(Auth::user())) {
+            $post->viewers()->attach(Auth::user()->id);
+        }
+
 
         return view('posts.show', compact('post', 'page'));
     }

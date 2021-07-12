@@ -47,4 +47,9 @@ class User extends Authenticatable
     public function posts() {
        return $this->hasMany(Post::class);
     }
+
+    public function viewed_posts() {
+        return $this->belongsToMany(Post::class); // 네이밍 컨벤션을 따르지 않으면, 컬럼명을 정의해줘야됨.
+        // return $this->belongsToMany(Post::class, 'post_user', 'user_id', 'post_id', 'id', 'id', 'post');
+    }
 }
