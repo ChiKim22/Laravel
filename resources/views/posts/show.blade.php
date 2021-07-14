@@ -11,17 +11,17 @@
 <body>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Show') }}
+            {{ __('상세 보기') }}
         </h2>
     </x-slot>
         {{-- <form action=""></form> --}}
-                <div class="container mb-3">
+                <div class="container ml-3 mt-5 mb-3">
                 <label for="title">Title</label>
                 <input type="text" readonly class="form-control" value="{{ $post->title }}">
               </div>
               <div class="container mb-5">
-                <label for="content" class="form-label">Content</label>
-                <div name="content" readonly id="content">{!! $post->content !!}</textarea>
+                <label for="content" class="form-label ml-3">Content</label>
+                <div class="ml-3" name="content" readonly id="content">{!! $post->content !!}</textarea>
               </div>
               <div class="container mb-3">
                 <label>Image</label>
@@ -50,7 +50,7 @@
               @if (auth()->user()->id == $post->user_id)
               {{-- @can('update, $post') --}}
               <div class="flex">
-                <a class="btn btn-primary" href="{{ route('posts.index', ['page'=>$page]) }}">Menu</a>
+                <a class="btn btn-primary ml-3" href="{{ route('posts.index', ['page'=>$page]) }}">Menu</a>
                 
                 <a class="btn btn-warning" href = "{{ route('post.edit', ['post'=>$post->id, 'page'=>$page]) }}">Edit</a>
 

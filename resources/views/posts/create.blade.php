@@ -21,13 +21,12 @@
 
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Create') }}
+                {{ __('글 쓰기') }}
             </h2>
         </x-slot>
             {{-- <form action="/posts/store" method="post">  --}}
                 @csrf
-                <legend style="text-align: center">글쓰기</legend>
-                <div class="container mb-3">
+                <div class="container mt-5 mb-3">
                     <label for="title" class="form-label">제목</label>
                     <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="{{ old('title') }}">
                         @error('title')
@@ -41,15 +40,16 @@
                             <div>{{ $message }}</div>
                         @enderror
                   </div>
-                  <div class="form-group">
-                      <label for="file">File</label>
+                  <div class="form-group ml-20 mb-3">
+                    <label for="file">Image File</label>
+                      <br>
                       <input type="file" id="file" name="imageFile">
-
+                      
                       @error('imageFile')
                        <div>{{ $message }}</div>
                       @enderror
                   </div>
-                  <div class="submitbtn">
+                  <div class="submitbtn ml-20">
                     <button type="submit" class="btn btn-outline-primary">등록하기</button>
                   </div>
             </form>
