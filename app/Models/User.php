@@ -22,7 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password', // 이곳에 명시된 이름들은 컬럼값으로 사용가능하다.
     ];
 
     /**
