@@ -68,3 +68,7 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 Route::get('/github/login', [GithubAuthController::class, 'redirect'])->name('github.login'); // github login
 
 Route::get('/github/callback', [GithubAuthController::class, 'callback']);
+
+Route::get('google/login', [GoogleAuthController::class, 'redirect'])->name('google.login');
+
+Route::get('/google/callback', [GoogleAuthController::class, 'callback']);
