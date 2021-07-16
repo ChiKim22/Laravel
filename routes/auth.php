@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\GithubAuthController;
+use App\Http\Controllers\GoogleAuthController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -69,6 +70,6 @@ Route::get('/github/login', [GithubAuthController::class, 'redirect'])->name('gi
 
 Route::get('/github/callback', [GithubAuthController::class, 'callback']);
 
-Route::get('google/login', [GoogleAuthController::class, 'redirect'])->name('google.login');
+Route::get('/google/login', [GoogleAuthController::class, 'redirect'])->name('google.login');
 
 Route::get('/google/callback', [GoogleAuthController::class, 'callback']);
