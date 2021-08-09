@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\GithubAuthController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\KakaoAuthController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -66,10 +67,11 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
 
-Route::get('/github/login', [GithubAuthController::class, 'redirect'])->name('github.login'); // github login
-
+Route::get('/github/login', [GithubAuthController::class, 'redirect'])->middleware('guest')->name('github.login'); // github signin
 Route::get('/github/callback', [GithubAuthController::class, 'callback']);
 
-Route::get('/google/login', [GoogleAuthController::class, 'redirect'])->name('google.login');
-
+Route::get('/google/login', [GoogleAuthController::class, 'redirect'])->middleware('guest')->name('google.login'); // google signin
 Route::get('/google/callback', [GoogleAuthController::class, 'callback']);
+
+Route::get('/kakao/login', [KakaoAuthController::class, 'redirect'])->middleware('guest')->name('kakao.login'); // kakao signin
+Route::get('/kakao/callback', [KakaoAuthController::class, 'callback']);
