@@ -25,8 +25,8 @@ class GoogleAuthController extends Controller
         $user = Socialite::driver('google')->user();
         // dd($user);
 
-        $user = User::firstOrCreate([ // 이미 있으면 걸러줌.
-            'email' => $user->getEmail()], // 검색조건
+        $user = User::firstOrCreate([
+            'email' => $user->getEmail()],
             ['password' => Hash::make(Str::random(24)),
             'name' => $user->getName()]
         );
