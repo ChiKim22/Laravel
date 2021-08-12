@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Free;
 
 class PostsController extends Controller
 {
@@ -197,5 +198,12 @@ class PostsController extends Controller
         // 정렬기준 (order by('title', '여러개 가능') ==> 제목 순)
         return view('posts.index', compact('posts'));
     }
-    
+
+    public function search(){
+        $search_text = $_GET['query'];
+        $posts = Post::where('title', 'LIKE', '%'.$search_text.'%')->with('content')->get();
+
+        return view('posts.search', compact('posts'));
+    }
+
 }
