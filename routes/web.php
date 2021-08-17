@@ -34,6 +34,10 @@ Route::post('/posts/store', [PostsController::class, 'store'])/*->middleware(['a
 Route::get('/posts/index', [PostsController::class, 'index'])->name('posts.index');
 
 Route::get('/posts/myPost', [PostsController::class, 'myPost'])->name('posts.myPost');
+
+//search
+Route::get('/posts/search', [PostsController::class, 'search'])->name('post.search');
+
 //상세보기
 Route::get('/posts/show/{id}', [PostsController::class, 'show'])->name('posts.show');
 //edit
@@ -43,3 +47,4 @@ Route::put('/posts/{id}', [PostsController::class, 'update'])->name('post.update
 Route::delete('/posts/{id}', [PostsController::class, 'destroy'])->name('post.delete');
 
 Route::get('/chart/index', [ChartController::class, 'index']);
+
