@@ -13,13 +13,20 @@
         <h1>게시글 리스트</h1> --}}
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('리스트') }}
+                {{ __('Posts') }}
             </h2>
         </x-slot>
 
         @auth
-        <a href="/posts/create" class="btn btn-primary ml-3">게시글 작성</a>
+        <a href="/posts/create" class="btn btn-primary ml-3">Create Post</a>
         @endauth
+
+        <div class="form-group">
+            <form class="form-control-lg mt-2" method="get" action="{{ Route('post.search') }}" >
+                <input type="form-control" name="search" placeholder="Search" required />
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" >Search</button>
+            </form>
+        </div>
 
     <ul class="container mt-3">
         @foreach ($posts as $post)
