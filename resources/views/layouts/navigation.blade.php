@@ -26,6 +26,7 @@
                     <x-nav-link :href="route('posts.myPost')" :active="request()->routeIs('posts.myPost')">
                         {{ __('MyPost') }}
                     </x-nav-link>
+                    
                 </div>
             </div>
 

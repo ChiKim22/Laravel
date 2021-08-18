@@ -21,7 +21,7 @@
 
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('글 쓰기') }}
+                {{ __('Post Create') }}
             </h2>
         </x-slot>
             {{-- <form action="/posts/store" method="post">  --}}
