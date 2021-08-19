@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Post extends Model
 {   //모델은 하나의 레코드
@@ -12,6 +12,8 @@ class Post extends Model
     //컨벤션(관례)을 따르지 않으면 따로 테이블 이름 지정해줘야됨.
 
     use HasFactory;
+
+    protected $fillale = ['title', 'content'];
 
     public function imagePath() {
         // $path = '/storage/images'; // 환경변수
