@@ -15,17 +15,20 @@
         </h2>
     </x-slot>
         {{-- <form action=""></form> --}}
-                <div class="container ml-3 mt-5 mb-3">
+                <div class="container ml-3 mt-5 mb-5">
+                <a class="btn btn-primary mb-3" href="{{ route('posts.index', ['page'=>$page]) }}">Back</a>
+                <br>
                 <label for="title">Title</label>
                 <input type="text" readonly class="form-control" value="{{ $post->title }}">
               </div>
               <div class="container mb-5">
-                <label for="content" class="form-label ml-3">Content</label>
-                <div class="ml-3" name="content" readonly id="content">{!! $post->content !!}</textarea>
+                <label for="content" class="form-label">Content</label>
+                <div class="form-control" name="content" readonly id="content">{!! $post->content !!}</textarea>
               </div>
               <div class="container mb-3">
+                <br>
                 <label>Image</label>
-                <label for="imageFile">Post Image</label>
+                {{-- <label for="imageFile">Post Image</label> --}}
                 <div class="my-6 mx-3 w-25">
                   {{-- <img src="/storage/images/{{ $post->image ?? 'noImage.jpg' }}"/> --}}
                   <img src="{{ $post->imagePath() }}" class="img-thumbnail"/>
@@ -39,20 +42,19 @@
                 <label>Last Worked</label>
                 <input type="text" readonly class="form-control" value="{{ $post->updated_at }}">
               </div>
-              <div class="container mb-3">
+              <div class="container mb-5">
                 <label>User</label>
                 <input type="text" readonly class="form-control" value="{{ $post->user->name }}">
                 {{-- <input type="text" readonly class="form-control" value="{{ $post->user()->select('name', 'email')->get() }}"> --}}
                 {{-- email 정보도 표시함 단, name 뒤에 괄호를 빼면 모든 정보가 나옴 --}}
+                <br>
               </div>
               
               @auth
               @if (auth()->user()->id == $post->user_id)
               {{-- @can('update, $post') --}}
               <div class="flex">
-                <a class="btn btn-primary ml-3" href="{{ route('posts.index', ['page'=>$page]) }}">Menu</a>
-                
-                <a class="btn btn-warning" href = "{{ route('post.edit', ['post'=>$post->id, 'page'=>$page]) }}">Edit</a>
+              <a class="btn btn-warning" href = "{{ route('post.edit', ['post'=>$post->id, 'page'=>$page]) }}">Edit</a>
 
                 <form action="{{ route('post.delete', ['id'=>$post->id, 'page'=>$page]) }}" method="post">
                   @csrf
