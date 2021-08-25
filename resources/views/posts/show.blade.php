@@ -66,6 +66,13 @@
               {{-- @endcan --}}
               @endauth
         </form>
+
+        @extends('layouts.app')
+
+        @section('content')
+          <comments-manager></comments-manager>
+        @endsection
+
         </div>
 </body>
 </html>

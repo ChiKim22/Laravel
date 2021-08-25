@@ -7,6 +7,7 @@
 
 <script>
 export default {
+<<<<<<< HEAD
     data: function() {
     return {
         state: 'default',
@@ -17,6 +18,8 @@ export default {
     }
 },
 
+=======
+>>>>>>> 194aeaabb041ec44a3346ba12215ee6e68ba73f9
     fetchComments() {
     const t = this;
 
@@ -30,6 +33,19 @@ created() {
     this.fetchComments();
 },
 
+<<<<<<< HEAD
+=======
+data: function() {
+    return {
+        state: 'default',
+        data:{
+            body: ''
+        },
+        comments:[]
+    }
+},
+
+>>>>>>> 194aeaabb041ec44a3346ba12215ee6e68ba73f9
 saveComment() {
     const t = this;
 
